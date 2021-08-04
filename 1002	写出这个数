@@ -1,0 +1,21 @@
+#include <stdio.h>     //sprintf()包含其中，int sprintf(char *str, char * format [, argument, ...]);
+#include <string.h>    //strlen()包含于 string.h
+
+int main(){
+    char pinyin[10][5]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
+                      //使用二维字符数组存储字符串，最大的“ling”占4个字符，加上字符数组结尾要以结束符‘\0’结尾，所以将10个数组的长度设为5.
+    int sum=0;
+    char s[101];      //使用字符数组存储输入的数，输入最大不超过10的100次方，即最大100个9，同样的字符数组结尾要以结束符‘\0’结尾，所以定义数组长度为101.
+    gets(s);          //gets()方法与scanf("%s",s)不同之处在于前者会将‘ ’（空格）也输入到字符数组中，后者遇到‘ ’（空格）或者回车都会停止输入
+    for(int i=0;i<strlen(s);i++){
+        sum+=s[i]-'0';    //遍历数组并作差，求和
+    }
+    char t[4];        //将求和结果存于字符数组
+    sprintf(t,"%d",sum);     //将int型的sum以"%d"的格式转换后复制到数组t中（sprintf函数的作用）
+    for(int i=0;i<strlen(t);i++){
+        if(i!=0)
+            printf(" ");
+        printf("%s",pinyin[t[i]-'0']);     //控制格式，首先输出一个数，后面的数输出之前都要带空格，实现结尾无空格的格式
+    }
+
+}
